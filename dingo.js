@@ -7,8 +7,10 @@ const Web3 = require('web3');
 const os = require("os");
 const sort = require('fast-sort').sort;
 
-const BLACKLIST = JSON.parse(fs.readFileSync(`settings/public.json`)).blacklistedAddresses
-const DINGO_COOKIE_PATH = '~/.dingocoin/testnet1/.cookie'.replace('~', os.homedir);
+const NETWORKS = JSON.parse(fs.readFileSync(`settings/networks.json`))
+const BLACKLIST = NETWORKS.blacklistedAddresses
+const TESTNET = NETWORKS.testnet
+const DINGO_COOKIE_PATH = TESTNET ? '~/.dingocoin/testnet1/.cookie'.replace('~', os.homedir) : '~/.dingocoin/.cookie'.replace('~', os.homedir);
 const DINGO_PORT = 34646;
 
 module.exports = {

@@ -1,7 +1,4 @@
 {
-  "provider": "https://rpc-mumbai.maticvigil.com/",
-  "chainId": 80001,
-  "contractAddress": "0x42134212af4e5277702da9317a77d7f3db722ba3",
   "contractAbi":
   [
     {
