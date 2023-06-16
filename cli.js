@@ -47,7 +47,7 @@ function parseBool(s) {
 }
 
 (function() {
-  const validNetworks = ["bsc", "mumbai"];
+  const validNetworks = ["bsc", "mumbai", "mumbai-solo"];
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
@@ -686,7 +686,7 @@ Available commands:
         try {
           dingoSettingsFlattened.push([
             i,
-            stat.dingoSettings.changeAddress,
+            stat.dingoSettings.dingoNetworkChangeAddress,
             stat.dingoSettings.changeConfirmations.toString(),
             stat.dingoSettings.depositConfirmations.toString(),
             stat.dingoSettings.taxPayoutAddresses.join(' ')
