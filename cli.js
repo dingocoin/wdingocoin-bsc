@@ -655,16 +655,6 @@ Available commands:
       if (stat === undefined) {
         networkSettingsFlattened.push(['UNREACHABLE' + i, '', '', '', ''])
       } else {
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-        console.log(stat.networkSettings.payoutCoordinator)
-
         networkSettingsFlattened.push([
           i,
           stat.networkSettings.payoutCoordinator,
