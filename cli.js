@@ -228,7 +228,7 @@ Available commands:
     if(approvals >= networkSettings[network].authorityThreshold) {
       console.log("re-configure authorized.")
       console.log(
-        chalk.bold(`Use the following details to call, with your wallet, the \`configure\` function of the smart contract (https://mumbai.polygonscan.com/address/${smartContractSettings.contractAddress}#writeContract).\n`) +
+        chalk.bold(`Use the following details to call, with your wallet, the \`configure\` function of the smart contract (https://mumbai.polygonscan.com/address/${networkSettings[network].contractAddress}#writeContract).\n`) +
         chalk.red.bold('  (DO NOT COPY ANY WHITE SPACES OR YOUR TRANSACTION MAY FAIL!)\n') +
         `  config nonce: ${results.filter((x) => x !== undefined)[0].configNonce}\n` +
         `  new addresses: ${results.filter((x) => x !== undefined)[0].newAuthorityAddresses}\n` +
@@ -327,7 +327,7 @@ Available commands:
       }
     }
     console.log(
-      chalk.bold(`Use the following details to call, with your wallet, the \`mint\` function of the smart contract (https://bscscan.com/token/${smartContractSettings.contractAddress}#writeContract).\n`) +
+      chalk.bold(`Use the following details to call, with your wallet, the \`mint\` function of the smart contract (https://bscscan.com/token/${networkSettings[network].contractAddress}#writeContract).\n`) +
       chalk.red.bold('  (DO NOT COPY ANY WHITE SPACES OR YOUR TRANSACTION MAY FAIL!)\n') +
       `  depositAddress: ${results.filter((x) => x !== undefined)[0].depositAddress}\n` +
       `  amount: ${results.filter((x) => x !== undefined)[0].mintAmount}\n` +
@@ -359,7 +359,7 @@ Available commands:
 
   function createBurnTransaction(amount, destination) {
     console.log(
-      chalk.bold(`Use the following details to call, with your wallet, the \`burn\` function of the smart contract (https://bscscan.com/token/${smartContractSettings.contractAddress}#writeContract).\n`) +
+      chalk.bold(`Use the following details to call, with your wallet, the \`burn\` function of the smart contract (https://bscscan.com/token/${networkSettings[network].contractAddress}#writeContract).\n`) +
       chalk.red.bold('  (DO NOT COPY ANY WHITE SPACES OR YOUR TRANSACTION MAY FAIL!)\n') +
       `  amount: ${dingo.toSatoshi(amount)}\n` +
       `  destination: ${destination}\n` +

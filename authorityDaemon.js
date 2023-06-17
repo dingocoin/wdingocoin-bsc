@@ -290,7 +290,7 @@ function isObject(x) {
     }
     mintAmount = mintAmount.toString();
 
-    const signature = smartContract.signMintTransaction(smartContractSettings.chainId, mintAddress, mintNonce, depositAddress, mintAmount);
+    const signature = smartContract.signMintTransaction(networkSettings[network].chainId, mintAddress, mintNonce, depositAddress, mintAmount);
 
     res.send(await createTimedAndSignedMessage({
       mintAddress: mintAddress,
@@ -372,7 +372,7 @@ function isObject(x) {
       newAuthorityThreshold: networkSettings[network].newAuthorityThreshold,
       newMinBurnAmount: networkSettings[network].newMinBurnAmount,
     };
-    const signature = smartContract.signConfigure(smartContractSettings.chainId, networkSettings[network].configurationNonce, ourNewAddresses.addresses, networkSettings[network].newAuthorityThreshold, networkSettings[network].newMinBurnAmount)
+    const signature = smartContract.signConfigure(networkSettings[network].chainId, networkSettings[network].configurationNonce, ourNewAddresses.addresses, networkSettings[network].newAuthorityThreshold, networkSettings[network].newMinBurnAmount)
 
     if(
       JSON.stringify(ourNewAddresses["addresses"]) === JSON.stringify(data.data.addresses) &&
