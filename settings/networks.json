@@ -104,7 +104,7 @@
     "mumbai-solo": {
       "provider": "https://rpc-mumbai.maticvigil.com/",
       "supportReconfiguration": false,
-      "configurationNonce": 0,
+      "configurationNonce": 2,
       "authorityThreshold": 3,
       "minBurnAmount": 1000000000,
       "newAuthorityThreshold": 3,
