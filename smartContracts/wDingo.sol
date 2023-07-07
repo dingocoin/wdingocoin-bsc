@@ -1,10 +1,5 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-interface IERC20Metadata is IERC20 {
-  function name() external view returns (string memory);
-  function symbol() external view returns (string memory);
-  function decimals() external view returns (uint8);
-}
 
 interface IERC20 {
   function totalSupply() external view returns (uint256);
@@ -15,6 +10,12 @@ interface IERC20 {
   function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
+}
+
+interface IERC20Metadata is IERC20 {
+  function name() external view returns (string memory);
+  function symbol() external view returns (string memory);
+  function decimals() external view returns (uint8);
 }
 
 abstract contract Context {
@@ -177,7 +178,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
       ) internal virtual {}
 }
 
-contract BEP20Token is ERC20 {
+contract wtDingocoinToken is ERC20 {
 
   uint8 private _decimals;
   uint256 private _chainId;
@@ -192,16 +193,15 @@ contract BEP20Token is ERC20 {
   mapping (address => uint256[]) private _burnAmount;
   mapping (address => string[]) private _burnDestination;
 
-  constructor() ERC20("Wrapped Dingocoin", "wDingocoin") {
+  constructor() ERC20("Wrapped tDingocoin", "wtDingocoin") {
     _decimals = 8;
-    _chainId = 56;
+    _chainId = 80001;
 
     _authorityAddresses = [
-      0x0bee89d055Bc18250C71B72B2e24EcF723e9a8ef,
-      0xD14Bc59472b8f1fA5baA99a17855d06aD327dCae,
-      0x3279f7B244F0194fd359D5AC29359ca676193aDb,
-      0x9d046eDc2C80727259355E4CFBb8B72750348Ad9,
-      0x5234B6a4df31598dc4B26183ad7C452E47AB267F
+      0xb1B323740a8E7D13AF10839b121e22083Da23Ac1,
+      0x31d75dB9eC7F1aBE2905fb590a4E41401F837C05,
+      0x9C1844FFD3fb0E2c397D6510d3dCf3E2f77f47A2,
+      0xb37F35DAfd8E5050CC80D9E262ad0176aD19483D
     ];
     _authorityThreshold = 3;
     _minBurnAmount = 1000000000;

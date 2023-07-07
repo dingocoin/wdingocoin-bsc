@@ -7,7 +7,10 @@ const Web3 = require('web3');
 const os = require("os");
 const sort = require('fast-sort').sort;
 
-const DINGO_COOKIE_PATH = '~/.dingocoin/.cookie'.replace('~', os.homedir);
+const NETWORKS = JSON.parse(fs.readFileSync(`settings/networks.json`))
+const BLACKLIST = NETWORKS.blacklistedAddresses
+const TESTNET = NETWORKS.testnet
+const DINGO_COOKIE_PATH = TESTNET ? '~/.dingocoin/testnet1/.cookie'.replace('~', os.homedir) : '~/.dingocoin/.cookie'.replace('~', os.homedir);
 const DINGO_PORT = 34646;
 
 module.exports = {
@@ -130,6 +133,9 @@ async function listReceivedByAddress(confirmations) {
   const data = await callRpc('listreceivedbyaddress', [confirmations, false, true]);
   const dict = {};
   for (const entry of data) {
+    if(BLACKLIST.includes(entry.address)) {
+      continue;
+    }
     dict[entry.address] = entry;
   }
   return dict;
@@ -137,7 +143,7 @@ async function listReceivedByAddress(confirmations) {
 
 async function getReceivedAmountByAddress(confirmations, address) {
   const received = await listReceivedByAddress(confirmations);
-  if (!(address in received)) {
+  if (!(address in received) || BLACKLIST.includes(address)) {
     return 0;
   }
   return received[address].amount;
@@ -147,7 +153,7 @@ async function getReceivedAmountByAddresses(confirmations, addresses) {
   const received = await listReceivedByAddress(confirmations);
   const result = {};
   for (const address of addresses) {
-    if (!(address in received)) {
+    if (!(address in received) || BLACKLIST.includes(address)) {
       result[address] = 0;
     } else {
       result[address] = received[address].amount;
@@ -157,6 +163,7 @@ async function getReceivedAmountByAddresses(confirmations, addresses) {
 }
 
 function listUnspent(confirmations, addresses) {
+  addresses = addresses.filter(address => !BLACKLIST.includes(address))
   if (addresses === null || addresses === undefined || addresses.length === 0) {
     return [];
   } else {
