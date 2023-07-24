@@ -27,7 +27,6 @@ function getAuthorityLink(x) {
 const FLAT_FEE = BigInt(dingo.toSatoshi('10'));
 const DUST_THRESHOLD = BigInt(dingo.toSatoshi('1'));
 const PAYOUT_NETWORK_FEE_PER_TX = BigInt(dingo.toSatoshi('20')); // Add this to network fee for each deposit / withdrawal.
-let RECONFIGURING = false;
 
 function meetsTax(x) {
   return BigInt(x) >= FLAT_FEE;
@@ -72,7 +71,7 @@ function isObject(x) {
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
-    throw new Error("No startup arguments provided. Example startup: TODO")
+    throw new Error("No startup arguments provided. Example startup: node authorityDaemon.js bsc")
   }
   if(!validNetworks.includes(args[0])) {
     throw new Error(`${args[0]} network is not a valid network. Valid networks are: ${validNetworks.join(', ')}`)
@@ -354,9 +353,6 @@ function isObject(x) {
   app.post('/triggerReconfigurationEvent', createRateLimit(20, 1), asyncHandler(async (req, res) => {
     if(!networkSettings[network].supportReconfiguration) {
       throw new Error("reconfiguration event does not have support from this node.")
-    }
-    if(RECONFIGURING) {
-      throw new Error("re-configuration event is already underway.");
     }
     let ourNewAddresses = {addresses: []};
     for(const x of networkSettings[network].authorityNodes) {
