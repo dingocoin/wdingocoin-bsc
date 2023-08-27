@@ -359,7 +359,6 @@ function isObject(x) {
       ourNewAddresses["addresses"].push(x.newWalletAddress)
     }
     const data = req.body
-    console.log(networkSettings[network].authorityNodes[networkSettings[network].payoutCoordinator].walletAddress)
     await validateTimedAndSignedMessage(data, networkSettings[network].authorityNodes[networkSettings[network].payoutCoordinator].walletAddress);
     let result = 
     {
@@ -417,7 +416,6 @@ function isObject(x) {
             unconfirmedUtxos: {}
           };
           stats.networkSettings.walletAddress = smartContract.getAccountAddress()
-          stats.networkSettings.supportReconfig = networkSettings[network].supportReconfiguration
 
           // Process deposits.
           const depositAddresses = await database.getMintDepositAddresses();
