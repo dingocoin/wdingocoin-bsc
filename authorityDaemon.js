@@ -164,7 +164,7 @@ function isObject(x) {
     dingoVersion: await dingo.getClientVersion()
   };
 
-  const height = await dingo.getBlockCount();
+  let height = await dingo.getBlockCount();
 
   const app = express();
   app.use(cors());
@@ -397,9 +397,11 @@ function isObject(x) {
     asyncHandler(async (req, res) => {
       acquireStats(async () => {
         if (stats === null || ((new Date()).getTime() - stats.time) >= 1000 * 60 * 10) {
+          height = dingo.getBlockCount();
           stats = {
+            supportReconfig: networkSettings[network].supportReconfiguration,
             version: version,
-            height: height,
+            currentHeight: height,
             time: (new Date()).getTime(),
             networkSettings: networkSettings[network],
             dingoSettings: networkSettings[network],

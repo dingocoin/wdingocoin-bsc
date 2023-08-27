@@ -624,7 +624,7 @@ Available commands:
           (new Date(stat.version.timestamp)).toUTCString(),
           stat.version.clean ? 'Yes' : 'No',
           stat.version.dingoVersion === undefined ? '' : stat.version.dingoVersion.toString(),
-          stat.height,
+          stat.currentHeight,
           stat.time === undefined ? '' : (new Date(stat.time).toUTCString())
         ]);
       }
@@ -657,6 +657,7 @@ Available commands:
       } else {
         networkSettingsFlattened.push([
           i,
+          stat.networkSettings.supportReconfig,
           stat.networkSettings.payoutCoordinator,
           stat.networkSettings.authorityThreshold,
           stat.networkSettings.authorityNodes.map((x) => `${x.hostname}:8443\\${x.walletAddress}`).join(' '),
@@ -666,12 +667,13 @@ Available commands:
     }
     const networkSettingsHeader = [
       nodeHeader,
+      { alias: 'Support Reconfiguration'},
       { alias: 'Coordinator' },
       { alias: 'Threshold' },
       { alias: 'Authority Nodes', width: 80 },
       { alias: 'Wallet Address' }
     ];
-    const networkSettingsFooter = ['Consensus'].concat(Array(networkSettingsHeader.length - 2).fill(consensusCell)).concat([function (cell, columnIndex, rowIndex, rowData) { return ''; }]);
+    const networkSettingsFooter = ['Consensus'].concat(Array(networkSettingsHeader.length - 1).fill(consensusCell)).concat([function (cell, columnIndex, rowIndex, rowData) { return ''; }]);
     s += '\n\n  [Public Settings]'
     s += Table(networkSettingsHeader, networkSettingsFlattened, networkSettingsFooter).render();
 
