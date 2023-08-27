@@ -359,6 +359,7 @@ function isObject(x) {
       ourNewAddresses["addresses"].push(x.newWalletAddress)
     }
     const data = req.body
+    console.log(networkSettings[network].authorityNodes[networkSettings[network].payoutCoordinator].walletAddress)
     await validateTimedAndSignedMessage(data, networkSettings[network].authorityNodes[networkSettings[network].payoutCoordinator].walletAddress);
     let result = 
     {
@@ -398,6 +399,7 @@ function isObject(x) {
       acquireStats(async () => {
         if (stats === null || ((new Date()).getTime() - stats.time) >= 1000 * 60 * 10) {
           height = dingo.getBlockCount();
+          console.log("raw height: "+height)
           stats = {
             supportReconfig: networkSettings[network].supportReconfiguration,
             version: version,
@@ -416,6 +418,8 @@ function isObject(x) {
             confirmedUtxos: {},
             unconfirmedUtxos: {}
           };
+          console.log("stats height: "+stats.currentHeight)
+          console.log(networkSettings[network].supportReconfiguration)
           stats.networkSettings.walletAddress = smartContract.getAccountAddress()
 
           // Process deposits.
