@@ -399,9 +399,7 @@ function isObject(x) {
       acquireStats(async () => {
         if (stats === null || ((new Date()).getTime() - stats.time) >= 1000 * 60 * 10) {
           height = await dingo.getBlockCount();
-          console.log("raw height: "+height)
           stats = {
-            supportReconfig: networkSettings[network].supportReconfiguration,
             version: version,
             currentHeight: height,
             time: (new Date()).getTime(),
@@ -418,9 +416,8 @@ function isObject(x) {
             confirmedUtxos: {},
             unconfirmedUtxos: {}
           };
-          console.log("stats height: "+stats.currentHeight)
-          console.log(networkSettings[network].supportReconfiguration)
           stats.networkSettings.walletAddress = smartContract.getAccountAddress()
+          stats.networkSettings.supportReconfig = networkSettings[network].supportReconfiguration
 
           // Process deposits.
           const depositAddresses = await database.getMintDepositAddresses();
@@ -786,14 +783,14 @@ function isObject(x) {
     async (req, res) => {
       const data = req.body;
       await validateTimedAndSignedMessageOne(data, networkSettings[network].authorityNodes.map((x) => x.walletAddress));
-      console.log(`TERMINATING! Suicide signal received from ${req.header('x-forwarded-for')}`);
+      console.log(`TERMINATING! Suicide signal received.}`);
       res.send();
       server.close();
     });
 
   app.use((err, req, res, _next) => {
     if (err instanceof IPBlockedError) {
-      res.status(401).send(`Access forbidden from ${req.header('x-forwarded-for')}`);
+      res.status(401).send(`Access forbidden from`);
     } else {
       res.status(err.status || 500).send('Internal server error');
     }
