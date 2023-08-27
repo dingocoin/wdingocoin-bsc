@@ -657,7 +657,7 @@ Available commands:
       } else {
         networkSettingsFlattened.push([
           i,
-          stat.networkSettings.supportReconfig,
+          // stat.networkSettings.supportReconfig,
           stat.networkSettings.payoutCoordinator,
           stat.networkSettings.authorityThreshold,
           stat.networkSettings.authorityNodes.map((x) => `${x.hostname}:8443\\${x.walletAddress}`).join(' '),
@@ -667,7 +667,7 @@ Available commands:
     }
     const networkSettingsHeader = [
       nodeHeader,
-      { alias: 'Support Reconfiguration'},
+      // { alias: 'Support Reconfiguration'},
       { alias: 'Coordinator' },
       { alias: 'Threshold' },
       { alias: 'Authority Nodes', width: 80 },
