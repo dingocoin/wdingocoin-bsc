@@ -398,7 +398,7 @@ function isObject(x) {
     asyncHandler(async (req, res) => {
       acquireStats(async () => {
         if (stats === null || ((new Date()).getTime() - stats.time) >= 1000 * 60 * 10) {
-          height = dingo.getBlockCount();
+          height = await dingo.getBlockCount();
           console.log("raw height: "+height)
           stats = {
             supportReconfig: networkSettings[network].supportReconfiguration,
