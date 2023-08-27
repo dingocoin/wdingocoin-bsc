@@ -673,7 +673,7 @@ Available commands:
       { alias: 'Authority Nodes', width: 80 },
       { alias: 'Wallet Address' }
     ];
-    const networkSettingsFooter = ['Consensus'].concat(Array(networkSettingsHeader.length - 1).fill(consensusCell)).concat([function (cell, columnIndex, rowIndex, rowData) { return ''; }]);
+    const networkSettingsFooter = ['Consensus'].concat(Array(networkSettingsHeader.length - 3).fill(consensusCell)).concat([function (cell, columnIndex, rowIndex, rowData) { return ''; }]);
     s += '\n\n  [Public Settings]'
     s += Table(networkSettingsHeader, networkSettingsFlattened, networkSettingsFooter).render();
 
