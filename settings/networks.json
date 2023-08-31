@@ -43,7 +43,7 @@
         "dingoNetworkChangeAddress": "9rUZv4sr7pgqhmw7Q9XLDb42w9EcUkUZCc",
         "changeConfirmations": 100,
         "depositConfirmations": 120,
-        "payoutCoordinator" 4:,
+        "payoutCoordinator": 4,
         "taxPayoutAddresses": [
             "D8xWYjX7zy3HyvdGrauHy1DdLe7sML51uG", 
             "DRkCnvWDPQDXRCVLmgWTJTvRcSju6yJwzx",
