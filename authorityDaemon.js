@@ -27,7 +27,6 @@ function getAuthorityLink(x) {
 const FLAT_FEE = BigInt(dingo.toSatoshi('10'));
 const DUST_THRESHOLD = BigInt(dingo.toSatoshi('1'));
 const PAYOUT_NETWORK_FEE_PER_TX = BigInt(dingo.toSatoshi('20')); // Add this to network fee for each deposit / withdrawal.
-let RECONFIGURING = false;
 
 function meetsTax(x) {
   return BigInt(x) >= FLAT_FEE;
@@ -72,7 +71,7 @@ function isObject(x) {
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
-    throw new Error("No startup arguments provided. Example startup: TODO")
+    throw new Error("No startup arguments provided. Example startup: node authorityDaemon.js bsc")
   }
   if(!validNetworks.includes(args[0])) {
     throw new Error(`${args[0]} network is not a valid network. Valid networks are: ${validNetworks.join(', ')}`)
@@ -165,7 +164,7 @@ function isObject(x) {
     dingoVersion: await dingo.getClientVersion()
   };
 
-  const height = await dingo.getBlockCount();
+  let height = await dingo.getBlockCount();
 
   const app = express();
   app.use(cors());
@@ -355,9 +354,6 @@ function isObject(x) {
     if(!networkSettings[network].supportReconfiguration) {
       throw new Error("reconfiguration event does not have support from this node.")
     }
-    if(RECONFIGURING) {
-      throw new Error("re-configuration event is already underway.");
-    }
     let ourNewAddresses = {addresses: []};
     for(const x of networkSettings[network].authorityNodes) {
       ourNewAddresses["addresses"].push(x.newWalletAddress)
@@ -401,9 +397,10 @@ function isObject(x) {
     asyncHandler(async (req, res) => {
       acquireStats(async () => {
         if (stats === null || ((new Date()).getTime() - stats.time) >= 1000 * 60 * 10) {
+          height = await dingo.getBlockCount();
           stats = {
             version: version,
-            height: height,
+            currentHeight: height,
             time: (new Date()).getTime(),
             networkSettings: networkSettings[network],
             dingoSettings: networkSettings[network],
@@ -784,14 +781,14 @@ function isObject(x) {
     async (req, res) => {
       const data = req.body;
       await validateTimedAndSignedMessageOne(data, networkSettings[network].authorityNodes.map((x) => x.walletAddress));
-      console.log(`TERMINATING! Suicide signal received from ${req.header('x-forwarded-for')}`);
+      console.log(`TERMINATING! Suicide signal received.}`);
       res.send();
       server.close();
     });
 
   app.use((err, req, res, _next) => {
     if (err instanceof IPBlockedError) {
-      res.status(401).send(`Access forbidden from ${req.header('x-forwarded-for')}`);
+      res.status(401).send(`Access forbidden from`);
     } else {
       res.status(err.status || 500).send('Internal server error');
     }

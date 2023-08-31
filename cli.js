@@ -51,7 +51,7 @@ function parseBool(s) {
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
-    throw new Error("No startup arguments provided. Example startup: TODO")
+    throw new Error("No startup arguments provided. Example startup: node cli.js bsc")
   }
   if(!validNetworks.includes(args[0])) {
     throw new Error(`${args[0]} network is not a valid network. Valid networks are: ${validNetworks.join(', ')}`)
@@ -624,7 +624,7 @@ Available commands:
           (new Date(stat.version.timestamp)).toUTCString(),
           stat.version.clean ? 'Yes' : 'No',
           stat.version.dingoVersion === undefined ? '' : stat.version.dingoVersion.toString(),
-          stat.height,
+          stat.currentHeight,
           stat.time === undefined ? '' : (new Date(stat.time).toUTCString())
         ]);
       }
@@ -657,6 +657,7 @@ Available commands:
       } else {
         networkSettingsFlattened.push([
           i,
+          // stat.networkSettings.supportReconfig,
           stat.networkSettings.payoutCoordinator,
           stat.networkSettings.authorityThreshold,
           stat.networkSettings.authorityNodes.map((x) => `${x.hostname}:8443\\${x.walletAddress}`).join(' '),
@@ -666,6 +667,7 @@ Available commands:
     }
     const networkSettingsHeader = [
       nodeHeader,
+      // { alias: 'Support Reconfiguration'},
       { alias: 'Coordinator' },
       { alias: 'Threshold' },
       { alias: 'Authority Nodes', width: 80 },
