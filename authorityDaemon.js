@@ -422,7 +422,9 @@ function isObject(x) {
 
           const coldAddresses = networkSettings[network].dingoNetworkColdAddresses
           stats.confirmedUtxos.totalChangeBalance = await dingo.listUnspent(networkSettings[network].depositConfirmations, coldAddresses)
-
+          console.log(coldAddresses)
+          console.log(stats.confirmedUtxos.totalChangeBalance)
+          
           // Process deposits.
           const depositAddresses = await database.getMintDepositAddresses();
           const computeDeposits = async (confirmations, output) => {
