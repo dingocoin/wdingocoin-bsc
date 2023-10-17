@@ -421,7 +421,7 @@ function isObject(x) {
           stats.networkSettings.walletAddress = smartContract.getAccountAddress()
 
           const coldAddresses = networkSettings[network].dingoNetworkColdAddresses
-          stats.confirmedUtxos.totalChangeBalance = await dingo.listUnspent(999999, coldAddresses)
+          stats.confirmedUtxos.totalChangeBalance = await dingo.listUnspent(networkSettings[network].depositConfirmations, coldAddresses)
 
           // Process deposits.
           const depositAddresses = await database.getMintDepositAddresses();
