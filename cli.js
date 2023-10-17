@@ -849,7 +849,8 @@ Available commands:
           confirmedUtxoStatsFlattened.push([
             i,
             stat.confirmedUtxos.totalChangeBalance,
-            stat.confirmedUtxos.totalDepositsBalance
+            stat.confirmedUtxos.totalDepositsBalance,
+            stat.confirmedUtxos.totalChangeBalance
           ]);
         } catch (e) {
           confirmedUtxoStatsFlattened.push([i, '', '']);
@@ -860,6 +861,7 @@ Available commands:
       nodeHeader,
       { alias: "Change Balance", formatter: satoshiFormatter, width: dingoWidth },
       { alias: "Deposits Balance", formatter: satoshiFormatter, width: dingoWidth },
+      { alias: "Cold Storage Balance", formatter: satoshiFormatter, width: dingoWidth },
     ];
     const confirmedUtxoFooter = ['Consensus'].concat(Array(confirmedUtxoHeader.length - 1).fill(consensusCell));
     s += '\n\n  [UTXOs (Confirmed)]';
