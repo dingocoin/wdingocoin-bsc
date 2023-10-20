@@ -2,7 +2,6 @@
     "blacklistedAddresses": [
         "2MxMRmWcBzh8k25wNmvJPQodKqvyL5kEZKg"
     ],
-    "testnet": false,
     "bsc": {
         "provider": "https://bsc-dataseed.binance.org",
         "supportReconfiguration": false,
@@ -41,6 +40,7 @@
         "chainId": 56,
         "contractAddress": "0x9b208b117B2C4F76C1534B6f006b033220a681A4",
         "dingoNetworkChangeAddress": "9rUZv4sr7pgqhmw7Q9XLDb42w9EcUkUZCc",
+        "dingoNetworkColdAddresses": [""],
         "changeConfirmations": 100,
         "depositConfirmations": 120,
         "payoutCoordinator": 4,
@@ -91,6 +91,7 @@
           "chainId": 80001,
           "contractAddress": "0x42134212af4e5277702da9317a77d7f3db722ba3",
           "dingoNetworkChangeAddress": "2N913AccRgw4RVimcmZe22DGY7dZ8wPu5hv",
+          "dingoNetworkColdAddresses": [""],
           "changeConfirmations": 100,
           "depositConfirmations": 120,
           "payoutCoordinator": 1,
