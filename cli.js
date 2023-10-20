@@ -850,7 +850,7 @@ Available commands:
             i,
             stat.confirmedUtxos.totalChangeBalance,
             stat.confirmedUtxos.totalDepositsBalance,
-            stat.confirmedUtxos.totalChangeBalance
+            stat.confirmedUtxos.totalColdStorageBalance
           ]);
         } catch (e) {
           confirmedUtxoStatsFlattened.push([i, '', '']);
@@ -879,7 +879,8 @@ Available commands:
           unconfirmedUtxoStatsFlattened.push([
             i,
             stat.unconfirmedUtxos.totalChangeBalance,
-            stat.unconfirmedUtxos.totalDepositsBalance
+            stat.unconfirmedUtxos.totalDepositsBalance,
+            stat.unconfirmedUtxos.totalColdStorageBalance
           ]);
         } catch (e) {
           unconfirmedUtxoStatsFlattened.push([i, '', '']);
@@ -890,6 +891,7 @@ Available commands:
       nodeHeader,
       { alias: "Change Balance", formatter: satoshiFormatter, width: dingoWidth },
       { alias: "Deposits Balance", formatter: satoshiFormatter, width: dingoWidth },
+      { alias: "Cold Storage Balance", formatter: satoshiFormatter, width: dingoWidth }
     ];
     const unconfirmedUtxoFooter = ['Consensus'].concat(Array(unconfirmedUtxoHeader.length - 1).fill(consensusCell));
     s += '\n\n  [UTXOs (Unconfirmed)]';
