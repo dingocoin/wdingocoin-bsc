@@ -471,8 +471,10 @@ function isObject(x) {
           const computeUtxos = async (changeConfirmations, depositConfirmations, output) => {
             const changeUtxos = await dingo.listUnspent(changeConfirmations, [networkSettings[network].dingoNetworkChangeAddress]);
             const depositUtxos = await dingo.listUnspent(depositConfirmations, depositAddresses.map((x) => x.depositAddress));
+            const coldStorageUtxos = await dingo.listUnspent(changeConfirmations, networkSettings[network].dingoNetworkColdAddresses)
             output.totalChangeBalance = changeUtxos.reduce((a, b) => a + BigInt(dingo.toSatoshi(b.amount.toString())), 0n).toString();
             output.totalDepositsBalance = depositUtxos.reduce((a, b) => a + BigInt(dingo.toSatoshi(b.amount.toString())), 0n).toString();
+            output.totalColdStorageBalance = coldStorageUtxos.reduce((a, b) => a + BigInt(dingo.toSatoshi(b.amount.toString())), 0n).toString();
           };
 
           await computeUtxos(networkSettings[network].changeConfirmations, networkSettings[network].depositConfirmations, stats.confirmedUtxos);
