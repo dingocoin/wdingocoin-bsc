@@ -136,8 +136,8 @@
         "contractAddress": "0x6ae3e678a8a65d188beb4a4494ca72394ba7c86a",
         "dingoNetworkChangeAddress": "2N7Ep69KEZ2iE1giyAhL6551HS24PQCyxoN",
         "dingoNetworkColdAddresses": ["2NAmh8EuE4r24JV4okrLQoEoEqRPdJiBMoC"],
-        "changeConfirmations": 2,
-        "depositConfirmations": 2,
+        "changeConfirmations": 10,
+        "depositConfirmations": 10,
         "payoutCoordinator": 0,
         "taxPayoutAddresses": [
           "nh2vKH1hySAVMBrfCtBXe2drLVGC3mCDnv"

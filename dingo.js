@@ -136,6 +136,7 @@ async function listReceivedByAddress(confirmations) {
     if(BLACKLIST.includes(entry.address)) {
       continue;
     }
+    console.log(entry)
     dict[entry.address] = entry;
   }
   return dict;
