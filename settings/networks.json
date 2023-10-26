@@ -105,7 +105,7 @@
     "mumbai-solo": {
       "provider": "https://rpc-mumbai.maticvigil.com/",
       "supportReconfiguration": false,
-      "configurationNonce": 2,
+      "configurationNonce": 0,
       "authorityThreshold": 3,
       "minBurnAmount": 1000000000,
       "newAuthorityThreshold": 3,
@@ -133,9 +133,9 @@
           }
         ],
         "chainId": 80001,
-        "contractAddress": "0x6ae3e678a8a65d188beb4a4494ca72394ba7c86a",
-        "dingoNetworkChangeAddress": "2N7Ep69KEZ2iE1giyAhL6551HS24PQCyxoN",
-        "dingoNetworkColdAddresses": ["2NAmh8EuE4r24JV4okrLQoEoEqRPdJiBMoC"],
+        "contractAddress": "0x9c8f440f22dc43c166e9a6cb5a83dbb8be1d1c33",
+        "dingoNetworkChangeAddress": "2N5Cqtp88WmQDxzWpM5fMMo2HNPnQMb6aDq",
+        "dingoNetworkColdAddresses": [""],
         "changeConfirmations": 10,
         "depositConfirmations": 10,
         "payoutCoordinator": 0,
