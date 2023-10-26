@@ -59,6 +59,7 @@ function getCookie() {
 
 async function callRpc(method, params) {
   const cookie = getCookie();
+  console.log(method)
   const options = {
       url: "http://localhost:" + DINGO_PORT.toString(),
       method: "post",
@@ -136,7 +137,15 @@ async function listReceivedByAddress(confirmations) {
     if(BLACKLIST.includes(entry.address)) {
       continue;
     }
-    console.log(entry)
+    if(entry.amouont <= 99999) {
+      console.log("true")
+      console.log("true")
+      console.log("true")
+      console.log("true")
+      console.log("true")
+      console.log("true")
+      continue;
+    }
     dict[entry.address] = entry;
   }
   return dict;
