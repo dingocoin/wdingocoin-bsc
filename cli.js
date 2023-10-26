@@ -115,7 +115,7 @@ function parseBool(s) {
 
 
   const repl = require('repl').start({ prompt: chalk.bold('wDingocoin > '), eval: eval, writer: (x) => x, ignoreUndefined: true });
-  require('repl.history')(repl, '.cli_history');
+  //require('repl.history')(repl, '.cli_history');
 
   const commandCallbacks = {
     help: help,
