@@ -9,7 +9,7 @@ const sort = require('fast-sort').sort;
 
 const NETWORKS = JSON.parse(fs.readFileSync(`settings/networks.json`))
 const BLACKLIST = NETWORKS.blacklistedAddresses
-const TESTNET = false
+const TESTNET = true
 const DINGO_COOKIE_PATH = TESTNET ? '~/.dingocoin/testnet1/.cookie'.replace('~', os.homedir) : '~/.dingocoin/.cookie'.replace('~', os.homedir);
 const DINGO_PORT = 34646;
 
@@ -60,6 +60,7 @@ function getCookie() {
 async function callRpc(method, params) {
   const cookie = getCookie();
   console.log(method)
+  console.log(params)
   const options = {
       url: "http://localhost:" + DINGO_PORT.toString(),
       method: "post",
