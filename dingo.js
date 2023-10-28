@@ -59,8 +59,6 @@ function getCookie() {
 
 async function callRpc(method, params) {
   const cookie = getCookie();
-  console.log(method)
-  console.log(params)
   const options = {
       url: "http://localhost:" + DINGO_PORT.toString(),
       method: "post",
