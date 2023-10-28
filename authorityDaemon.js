@@ -27,7 +27,12 @@ function getAuthorityLink(x) {
 const FLAT_FEE = BigInt(dingo.toSatoshi('10'));
 const DUST_THRESHOLD = BigInt(dingo.toSatoshi('1'));
 const PAYOUT_NETWORK_FEE_PER_TX = BigInt(dingo.toSatoshi('20')); // Add this to network fee for each deposit / withdrawal.
+const MINIMUM_DEPOSIT_AMOUNT = BigInt(dingo.toSatoshi("100000"))
 let RECONFIGURING = false;
+
+function meetsMinimum(x) {
+  return BigInt(x) >= MINIMUM_DEPOSIT_AMOUNT
+}
 
 function meetsTax(x) {
   return BigInt(x) >= FLAT_FEE;
@@ -247,9 +252,9 @@ function isObject(x) {
 
     // Retrieve deposited amount.
     const depositedAmount = dingo.toSatoshi((await dingo.getReceivedAmountByAddress(networkSettings[network].depositConfirmations, depositAddress)).toString());
-    const depositedAmountAfterTax = meetsTax(depositedAmount) ? amountAfterTax(depositedAmount) : 0n;
+    const depositedAmountAfterTax = meetsTax(depositedAmount) && meetsMinimum(depositedAmount) ? amountAfterTax(depositedAmount) : 0n;
     const unconfirmedAmount = dingo.toSatoshi((await dingo.getReceivedAmountByAddress(0, depositAddress)).toString()) - depositedAmount;
-    const unconfirmedAmountAfterTax = meetsTax(unconfirmedAmount) ? amountAfterTax(unconfirmedAmount) : 0n;
+    const unconfirmedAmountAfterTax = meetsTax(unconfirmedAmount) && meetsMinimum(unconfirmedAmount) ? amountAfterTax(unconfirmedAmount) : 0n;
 
     // Retrieve minted amount.
     const {mintNonce, mintedAmount} = await smartContract.getMintHistory(mintAddress, depositAddress);
@@ -427,8 +432,8 @@ function isObject(x) {
             const depositedAmounts = await dingo.getReceivedAmountByAddresses(confirmations, depositAddresses.map((x) => x.depositAddress));
             const totalDepositedAmount = Object.values(depositedAmounts).reduce((a, b) => a + BigInt(dingo.toSatoshi(b.toString())), 0n).toString();
             const totalApprovableTax = Object.values(depositedAmounts).reduce((a, b) => {
-              const amount = BigInt(dingo.toSatoshi(b.toString()));
-              if (meetsTax(amount)) {
+            const amount = BigInt(dingo.toSatoshi(b.toString()));
+              if (meetsTax(amount) && meetsMinimum(amount)) {
                 return a + BigInt(taxAmount(amount));
               } else {
                 return a;
@@ -457,7 +462,7 @@ function isObject(x) {
           stats.withdrawals.totalApprovableTax = 0n;
           stats.withdrawals.totalApprovedTax = withdrawals.reduce((a, b) => a + BigInt(b.approvedTax), 0n).toString();
           for (const b of burnAmounts) {
-            if (meetsTax(b)) {
+            if (meetsTax(b) && meetsMinimum(b)) {
               stats.withdrawals.totalApprovableAmount += BigInt(amountAfterTax(b));
               stats.withdrawals.totalApprovableTax += BigInt(taxAmount(b));
             }
@@ -501,7 +506,7 @@ function isObject(x) {
       const nonEmptyMintDepositAddresses = (await database.getMintDepositAddresses(Object.keys(deposited)));
       for (const a of nonEmptyMintDepositAddresses) {
         const depositedAmount = dingo.toSatoshi(deposited[a.depositAddress].amount.toString());
-        if (meetsTax(depositedAmount)) {
+        if (meetsTax(depositedAmount) && meetsMinimum(depositedAmount)) {
           const approvedTax = BigInt(a.approvedTax);
           const approvableTax = BigInt(taxAmount(depositedAmount));
           if (approvableTax > approvedTax) {
@@ -576,7 +581,7 @@ function isObject(x) {
         throw new Error('Dingo address not registered');
       }
       const depositedAmount = dingo.toSatoshi(deposited[p.depositAddress].amount.toString());
-      if (!meetsTax(depositedAmount)) {
+      if (!meetsTax(depositedAmount) && !meetsMinimum(depositedAmount)) {
         throw new Error('Deposited amount insufficient');
       }
       const approvedTax = BigInt(depositAddresses[p.depositAddress].approvedTax);
