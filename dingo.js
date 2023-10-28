@@ -133,6 +133,7 @@ async function listReceivedByAddress(confirmations) {
   const data = await callRpc('listreceivedbyaddress', [confirmations, false, true]);
   const dict = {};
   for (const entry of data) {
+    console.log(entry)
     if(BLACKLIST.includes(entry.address)) {
       continue;
     }
