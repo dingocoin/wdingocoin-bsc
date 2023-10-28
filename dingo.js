@@ -155,6 +155,15 @@ async function getReceivedAmountByAddress(confirmations, address) {
   if (!(address in received) || BLACKLIST.includes(address)) {
     return 0;
   }
+  if(received[address].amount < 100000) {
+    console.log("true")
+    console.log("true")
+    console.log("true")
+    console.log("true")
+    console.log("true")
+    console.log("true")
+    return 0;
+  }
   return received[address].amount;
 }
 
