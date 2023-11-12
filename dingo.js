@@ -133,17 +133,7 @@ async function listReceivedByAddress(confirmations) {
   const data = await callRpc('listreceivedbyaddress', [confirmations, false, true]);
   const dict = {};
   for (const entry of data) {
-    console.log(entry)
     if(BLACKLIST.includes(entry.address)) {
-      continue;
-    }
-    if(entry.amouont <= 99999) {
-      console.log("true")
-      console.log("true")
-      console.log("true")
-      console.log("true")
-      console.log("true")
-      console.log("true")
       continue;
     }
     dict[entry.address] = entry;
@@ -154,15 +144,6 @@ async function listReceivedByAddress(confirmations) {
 async function getReceivedAmountByAddress(confirmations, address) {
   const received = await listReceivedByAddress(confirmations);
   if (!(address in received) || BLACKLIST.includes(address)) {
-    return 0;
-  }
-  if(received[address].amount < 100000) {
-    console.log("true")
-    console.log("true")
-    console.log("true")
-    console.log("true")
-    console.log("true")
-    console.log("true")
     return 0;
   }
   return received[address].amount;
