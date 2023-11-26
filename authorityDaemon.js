@@ -69,7 +69,7 @@ function isObject(x) {
 }
 
 (async function main() {
-  const validNetworks = ["bsc", "mumbai", "mumbai-solo"];
+  const validNetworks = ["bsc", "polygon", "mumbai", "mumbai-solo"];
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
