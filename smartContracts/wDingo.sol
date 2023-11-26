@@ -178,7 +178,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
       ) internal virtual {}
 }
 
-contract wtDingocoinToken is ERC20 {
+contract wDingocoin is ERC20 {
 
   uint8 private _decimals;
   uint256 private _chainId;
@@ -193,15 +193,16 @@ contract wtDingocoinToken is ERC20 {
   mapping (address => uint256[]) private _burnAmount;
   mapping (address => string[]) private _burnDestination;
 
-  constructor() ERC20("Wrapped tDingocoin", "wtDingocoin") {
+  constructor() ERC20("Wrapped Dingocoin", "wDingocoin") {
     _decimals = 8;
-    _chainId = 80001;
+    _chainId = 137;
 
     _authorityAddresses = [
-      0xb1B323740a8E7D13AF10839b121e22083Da23Ac1,
-      0x31d75dB9eC7F1aBE2905fb590a4E41401F837C05,
-      0x9C1844FFD3fb0E2c397D6510d3dCf3E2f77f47A2,
-      0xb37F35DAfd8E5050CC80D9E262ad0176aD19483D
+      0x72321c492EAA102C331C0EB64c9E4a72036f2f1d,
+      0x90c5951c839de0CC80138D7A47a3F1F0eE5828Ba,
+      0xcceA32dDbd0b8c56904ED5Cf6Bed0260a753b90a,
+      0xfA3ba79a0266Fd0354547E4807b19bC8Cef0696C,
+      0x171922Ad1C671AaAB08A2EEFDf1F92cDB78cA6b4
     ];
     _authorityThreshold = 3;
     _minBurnAmount = 1000000000;
