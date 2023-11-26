@@ -40,7 +40,7 @@
         "chainId": 56,
         "contractAddress": "0x9b208b117B2C4F76C1534B6f006b033220a681A4",
         "dingoNetworkChangeAddress": "9rUZv4sr7pgqhmw7Q9XLDb42w9EcUkUZCc",
-        "dingoNetworkColdAddresses": [""],
+        "dingoNetworkColdAddresses": ["9rUZv4sr7pgqhmw7Q9XLDb42w9EcUkUZCc"],
         "changeConfirmations": 100,
         "depositConfirmations": 120,
         "payoutCoordinator": 4,
