@@ -97,7 +97,7 @@
         "contractAddress": "0x033babac01c4e3915cf71d24b6bfb58e606fdb80",
         "dingoNetworkChangeAddress": "9svx9KnrE4qTMMjFbjGGXWPrLZAg12Q2LN",
         "dingoNetworkColdAddresses": ["9svx9KnrE4qTMMjFbjGGXWPrLZAg12Q2LN"],
-        "changeConfirmations": 120,
+        "changeConfirmations": 100,
         "depositConfirmations": 120,
         "payoutCoordinator": 3,
         "taxPayoutAddresses": [
