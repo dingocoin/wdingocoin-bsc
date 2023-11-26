@@ -51,7 +51,7 @@ function parseBool(s) {
   const syncDelayThreshold = 15;
   const args = process.argv.slice(2);
   if(args.length <= 0) {
-    throw new Error("No startup arguments provided. Example startup: TODO")
+    throw new Error("No startup arguments provided. Example startup: node cli.js bsc")
   }
   if(!validNetworks.includes(args[0])) {
     throw new Error(`${args[0]} network is not a valid network. Valid networks are: ${validNetworks.join(', ')}`)
