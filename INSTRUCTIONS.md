@@ -24,6 +24,7 @@
 #### 4. Setup SSL.
 - Setup SSL related software:
     - `sudo apt install snap`
+    - `sudo apt install snapd`
     - `sudo snap install --classic certbot`
     - `sudo ln -s /snap/bin/certbot /usr/bin/certbot`
 - Generate certs: `sudo certbot certonly --standalone --register-unsafely-without-email`
