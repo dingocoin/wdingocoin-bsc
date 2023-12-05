@@ -1,10 +1,5 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-interface IERC20Metadata is IERC20 {
-  function name() external view returns (string memory);
-  function symbol() external view returns (string memory);
-  function decimals() external view returns (uint8);
-}
 
 interface IERC20 {
   function totalSupply() external view returns (uint256);
@@ -15,6 +10,12 @@ interface IERC20 {
   function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
+}
+
+interface IERC20Metadata is IERC20 {
+  function name() external view returns (string memory);
+  function symbol() external view returns (string memory);
+  function decimals() external view returns (uint8);
 }
 
 abstract contract Context {
@@ -177,7 +178,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
       ) internal virtual {}
 }
 
-contract BEP20Token is ERC20 {
+contract wDingocoin is ERC20 {
 
   uint8 private _decimals;
   uint256 private _chainId;
@@ -194,14 +195,14 @@ contract BEP20Token is ERC20 {
 
   constructor() ERC20("Wrapped Dingocoin", "wDingocoin") {
     _decimals = 8;
-    _chainId = 56;
+    _chainId = 137;
 
     _authorityAddresses = [
-      0x0bee89d055Bc18250C71B72B2e24EcF723e9a8ef,
-      0xD14Bc59472b8f1fA5baA99a17855d06aD327dCae,
-      0x3279f7B244F0194fd359D5AC29359ca676193aDb,
-      0x9d046eDc2C80727259355E4CFBb8B72750348Ad9,
-      0x5234B6a4df31598dc4B26183ad7C452E47AB267F
+      0x72321c492EAA102C331C0EB64c9E4a72036f2f1d,
+      0x90c5951c839de0CC80138D7A47a3F1F0eE5828Ba,
+      0xcceA32dDbd0b8c56904ED5Cf6Bed0260a753b90a,
+      0xfA3ba79a0266Fd0354547E4807b19bC8Cef0696C,
+      0x171922Ad1C671AaAB08A2EEFDf1F92cDB78cA6b4
     ];
     _authorityThreshold = 3;
     _minBurnAmount = 1000000000;

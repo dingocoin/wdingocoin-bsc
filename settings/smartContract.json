@@ -1,7 +1,4 @@
 {
-  "provider": "https://bsc-dataseed.binance.org",
-  "chainId": 56,
-  "contractAddress": "0x9b208b117B2C4F76C1534B6f006b033220a681A4",
   "contractAbi":
   [
     {
