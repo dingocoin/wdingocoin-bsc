@@ -784,7 +784,6 @@ function isObject(x) {
 
   let server = null;
   app.get(`/healthz`, (req, res) => {
-    console.log('healthz');
     res.status(200).json({ status: 'ok' });
   });
 
